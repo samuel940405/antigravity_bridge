@@ -1,0 +1,107 @@
+[
+    {
+        "id": "dc250539ff32a91a2491806bb1fee3af",
+        "name": "Ensorhuis",
+        "lat": 51.233328774227985,
+        "lon": 2.9160947116588054,
+        "category": "historic"
+    },
+    {
+        "id": "1f7ceab67cac20118f3210cc97896b76",
+        "name": "Galerie BeauSite",
+        "lat": 51.2344384,
+        "lon": 2.9159971,
+        "category": "tourism"
+    },
+    {
+        "id": "cfe544e931b0da2b62c25ef1c3a2c332",
+        "name": "artwork",
+        "lat": 51.23173,
+        "lon": 2.9138406,
+        "category": "tourism"
+    },
+    {
+        "id": "167eac8ba418689e74bbad9ca5dad9f7",
+        "name": "Casino Kursaal",
+        "lat": 51.23182944881365,
+        "lon": 2.9119842147587063,
+        "category": "historic"
+    },
+    {
+        "id": "fcbcb134ec083f06035dc6aede1c5cda",
+        "name": "Dansende Golven",
+        "lat": 51.232268999999995,
+        "lon": 2.910959449999999,
+        "category": "tourism"
+    },
+    {
+        "id": "83699361d0fc3bf622b8798bfd7dc8bd",
+        "name": "artwork",
+        "lat": 51.2325871,
+        "lon": 2.9160658,
+        "category": "tourism"
+    },
+    {
+        "id": "936165747d5ae49c31ae3682d9f042a9",
+        "name": "Kursaal",
+        "lat": 51.2317717,
+        "lon": 2.9120579,
+        "category": "amenity"
+    },
+    {
+        "id": "7eaeeb1a5efc072a453ca3eaba74df54",
+        "name": "artwork",
+        "lat": 51.2316006,
+        "lon": 2.9141771,
+        "category": "tourism"
+    },
+    {
+        "id": "eb0605a3ad8e57cd9255ecdf2402172e",
+        "name": "artwork",
+        "lat": 51.231581,
+        "lon": 2.9141673,
+        "category": "tourism"
+    },
+    {
+        "id": "0dcab8e455d0691ae448b0be62493574",
+        "name": "artwork",
+        "lat": 51.2315724,
+        "lon": 2.9141628,
+        "category": "tourism"
+    },
+    {
+        "id": "80bb71f354e1209be9712a22ac315879",
+        "name": "artwork",
+        "lat": 51.2339232,
+        "lon": 2.9168272,
+        "category": "tourism"
+    },
+    {
+        "id": "38fba4d8fadb2dbd4eb4745b8e7eed63",
+        "name": "artwork",
+        "lat": 51.231495,
+        "lon": 2.9131609,
+        "category": "tourism"
+    },
+    {
+        "id": "c6fa2f70ce2a0a14f39b9535650cb4d9",
+        "name": "artwork",
+        "lat": 51.231531,
+        "lon": 2.9141474,
+        "category": "tourism"
+    },
+    {
+        "id": "a1955cbfaa28fe34ef7a7ef1697770cd",
+        "name": "artwork",
+        "lat": 51.2315127,
+        "lon": 2.9141423,
+        "category": "tourism"
+    },
+    {
+        "id": "9ac608c50f6e1f1c2d6a9c3ac6ce41b0",
+        "name": "artwork",
+        "lat": 51.2313454,
+        "lon": 2.9125403,
+        "category": "tourism"
+    }
+]
