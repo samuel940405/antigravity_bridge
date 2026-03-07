@@ -201,6 +201,7 @@ _DEFAULTS = {
     'road_polyline':  [],
     'center_text':    "25.03390, 121.56440",
     'planner':        None,
+    'is_computing':   False,   # 防止重複觸發 pipeline
 }
 for k, v in _DEFAULTS.items():
     if k not in st.session_state:
@@ -388,11 +389,11 @@ with st.sidebar:
     st.markdown("**🎒 特殊路線 (V3.6)**")
     if st.button("📍 一鍵載入中原大學", use_container_width=True):
         cycu_pois = [
-            {'id': 'cycu_gate', 'name': '中原大學-校門口', 'lat': 24.95760, 'lon': 121.24080, 'category': 'amenity'},
-            {'id': 'cycu_lib', 'name': '中原大學-圖書館', 'lat': 24.95820, 'lon': 121.24130, 'category': 'amenity'},
-            {'id': 'cycu_sci', 'name': '中原大學-理學大樓', 'lat': 24.95790, 'lon': 121.24200, 'category': 'amenity'},
-            {'id': 'cycu_eng', 'name': '中原大學-工學大樓', 'lat': 24.95860, 'lon': 121.24180, 'category': 'amenity'},
-            {'id': 'cycu_dorm', 'name': '中原大學-宿舍', 'lat': 24.95930, 'lon': 121.23950, 'category': 'amenity'},
+            {'id': 'cycu_gate',    'name': '中原大學-校門口',     'lat': 24.95760, 'lon': 121.24080, 'category': 'amenity'},
+            {'id': 'cycu_lib',     'name': '中原大學-圖書館',     'lat': 24.95840, 'lon': 121.24100, 'category': 'amenity'},
+            {'id': 'cycu_dorm1',   'name': '中原大學-力行宿舍',   'lat': 24.95937, 'lon': 121.24093, 'category': 'amenity'},
+            {'id': 'cycu_student', 'name': '中原大學-學生活動中心','lat': 24.95900, 'lon': 121.24020, 'category': 'amenity'},
+            {'id': 'cycu_chapel',  'name': '中原大學-懷恩堂',     'lat': 24.95830, 'lon': 121.23980, 'category': 'amenity'},
         ]
         # 更新中心位址，並取代現有選擇
         st.session_state.center_text = "24.95820, 121.24130"
@@ -402,6 +403,23 @@ with st.sidebar:
         st.session_state.road_polyline = []
         st.session_state.planner = None
         st.success("✅ 已載入中原大學 5 個核心地標！")
+        st.rerun()
+
+    if st.button("⬜ 一鍵載入簡單矩形路線", use_container_width=True):
+        # 台北大安區標準街廓，四個正常十字路口，無髮夾彎
+        rect_pois = [
+            {'id': 'rect_a', 'name': '矩形-北西', 'lat': 25.02700, 'lon': 121.54300, 'category': 'amenity'},
+            {'id': 'rect_b', 'name': '矩形-北東', 'lat': 25.02700, 'lon': 121.54500, 'category': 'amenity'},
+            {'id': 'rect_c', 'name': '矩形-南東', 'lat': 25.02500, 'lon': 121.54500, 'category': 'amenity'},
+            {'id': 'rect_d', 'name': '矩形-南西', 'lat': 25.02500, 'lon': 121.54300, 'category': 'amenity'},
+        ]
+        st.session_state.center_text = "25.02600, 121.54400"
+        st.session_state.pois = rect_pois
+        st.session_state.selected_pois = list(rect_pois)
+        st.session_state.smooth_path = []
+        st.session_state.road_polyline = []
+        st.session_state.planner = None
+        st.success("✅ 已載入簡單矩形路線（台北大安區）！")
         st.rerun()
 
     st.divider()
@@ -507,7 +525,10 @@ with col_ctrl:
     # ── 路徑計算 ──────────────────────────────────────────────────────────
     st.markdown("### 🧭 路徑計算")
     if n_sel >= 2:
-        if st.button(f"計算 TSP 最佳路徑（{n_sel} 點）", use_container_width=True):
+        if st.button(f"計算 TSP 最佳路徑（{n_sel} 點）",
+                     use_container_width=True,
+                     disabled=st.session_state.is_computing):
+            st.session_state.is_computing = True
             prog = st.progress(0, text="初始化路網…")
             try:
                 prog.progress(10, text="下載 OSMnx 路網（2 km，快取優先）…")
@@ -523,8 +544,9 @@ with col_ctrl:
                 st.success(f"✅ {len(smooth):,} 個插值點（步長 4.0 m，封閉路徑）")
             except Exception as e:
                 prog.empty()
-                st.exception(e)   # 顯示完整 traceback，含行號
-            st.rerun()
+                st.exception(e)
+            finally:
+                st.session_state.is_computing = False
 
     else:
         st.caption("請選取 ≥2 個點位")
