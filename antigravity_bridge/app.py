@@ -597,6 +597,21 @@ with col_ctrl:
                 st.session_state.road_polyline = []
                 st.rerun()
     st.caption("💡 也可以直接點地圖空白處新增自訂點")
+    st.divider()
+    st.markdown("### 🌀 瞬間傳送")
+    with st.expander("直接跳到某個座標", expanded=False):
+        tp1, tp2 = st.columns(2)
+        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat")
+        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng")
+        if st.button("🌀 立刻傳送到此座標", use_container_width=True):
+            import urllib.request as _ur2, json as _json2
+            try:
+                payload = _json2.dumps({"coords": [{"lat": tp_lat, "lon": tp_lng}], "loop": False}).encode()
+                req = _ur2.Request("http://127.0.0.1:7788/push", data=payload, headers={"Content-Type": "application/json"})
+                _ur2.urlopen(req, timeout=5)
+                st.success(f"已傳送到 ({tp_lat:.4f}, {tp_lng:.4f})")
+            except Exception as e:
+                st.error(str(e))
 
     st.divider()
 
