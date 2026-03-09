@@ -202,7 +202,9 @@ _DEFAULTS = {
     'road_polyline':  [],
     'center_text':    "25.03390, 121.56440",
     'planner':        None,
-    'is_computing':   False,   # 防止重複觸發 pipeline
+    'is_computing':   False,
+    'instant_mode':   False,
+    'last_click_id':  None,
 }
 for k, v in _DEFAULTS.items():
     if k not in st.session_state:
@@ -218,10 +220,29 @@ def _full_pipeline(selected_pois, center_lat, center_lon, step_m=1.2):
     在 ThreadPoolExecutor 中非同步執行。
     Returns: (smooth_path, road_nodes, planner)
     """
+    import math
+
+    # 自動計算所有點位需要的半徑
+    if len(selected_pois) >= 2:
+        lats = [_lat(p) for p in selected_pois]
+        lons = [_lng(p) for p in selected_pois]
+        center_lat = (max(lats) + min(lats)) / 2
+        center_lon = (max(lons) + min(lons)) / 2
+        # 計算最遠點到中心的距離（公尺）
+        max_dist = max(
+            math.sqrt(((la - center_lat) * 111320) ** 2 +
+                      ((lo - center_lon) * 111320 * math.cos(math.radians(center_lat))) ** 2)
+            for la, lo in zip(lats, lons)
+        )
+        radius_m = max(int(max_dist * 1.3), DEFAULT_RADIUS)  # 加30%緩衝
+    else:
+        radius_m = DEFAULT_RADIUS
+
     planner = st.session_state.planner
-    if planner is None:
+    # 如果範圍變大需要重新載入路網
+    if planner is None or radius_m > DEFAULT_RADIUS:
         planner = RoutePlanner()
-        planner.load_graph(center_lat, center_lon, radius_m=DEFAULT_RADIUS)
+        planner.load_graph(center_lat, center_lon, radius_m=radius_m)
 
     # 1. TSP
     tsp_ordered = optimize_tsp(selected_pois, planner=planner)
@@ -281,8 +302,24 @@ def _render_map(center_lat, center_lon):
         zoom_start=15,
         tiles="CartoDB dark_matter",
     )
+    # 支援點擊地圖任意位置
+    m.add_child(folium.ClickForMarker(popup="自訂點"))
+
     sel_ids = {p['id'] for p in st.session_state.selected_pois}
     render_pois_on_map(m, st.session_state.pois, selected_ids=sel_ids)
+
+    # 已選自訂點顯示藍色圓點
+    for p in st.session_state.selected_pois:
+        if str(p.get('id', '')).startswith('custom') or str(p.get('id', '')).startswith('instant'):
+            folium.CircleMarker(
+                location=[_lat(p), _lng(p)],
+                radius=8,
+                color='#3b82f6',
+                fill=True,
+                fill_color='#3b82f6',
+                fill_opacity=0.8,
+                tooltip=p.get('name', '自訂點'),
+            ).add_to(m)
 
     if st.session_state.road_polyline:
         folium.PolyLine(
@@ -356,6 +393,22 @@ with st.sidebar:
     st.session_state.center_text = coord_text
     center_lat, center_lon = _parse_coord(coord_text)
 
+    st.divider()
+    st.markdown("### ⚡ 即時點即走")
+    instant_mode = st.toggle("開啟即時導航模式", value=st.session_state.instant_mode)
+    st.session_state.instant_mode = instant_mode
+    if instant_mode:
+        instant_teleport = st.toggle("點擊直接傳送（不走路）", value=False, key="instant_teleport")
+        if instant_teleport:
+            st.caption("點擊地圖 → 直接跳到該座標")
+        else:
+            st.caption("點擊地圖任意位置 → 自動規劃並注入手機")
+    else:
+        instant_teleport = False
+        st.caption("點擊地圖標記 → 加入巡迴清單")
+    st.session_state['instant_teleport'] = instant_teleport
+    st.divider()
+
     poi_limit = st.slider("最多探測點位數", 5, 30, 15, step=5)
 
     if st.button("🔍 重新探測 POI", use_container_width=True):
@@ -377,7 +430,7 @@ with st.sidebar:
     # 時速 Slider
     st.markdown("**🚶 模擬移動時速**")
     target_speed = st.slider(
-        "km/h", min_value=1, max_value=20, value=10, step=1,
+        "km/h", min_value=1, max_value=50, value=10, step=1,
         label_visibility="collapsed",
     )
     bridge.target_speed_kmh = target_speed
@@ -523,6 +576,53 @@ with col_ctrl:
 
     st.divider()
 
+    # ── 自訂座標新增 ──────────────────────────────────────────────────────
+    st.markdown("### 📍 自訂座標")
+    with st.expander("手動輸入經緯度", expanded=False):
+        c1, c2 = st.columns(2)
+        custom_lat = c1.number_input("緯度", value=24.9580, format="%.6f", key="custom_lat")
+        custom_lng = c2.number_input("經度", value=121.2410, format="%.6f", key="custom_lng")
+        custom_name = st.text_input("名稱", value="自訂點", key="custom_name")
+        if st.button("➕ 加入路線", use_container_width=True):
+            new_poi = {
+                'id': f'custom_{custom_lat:.5f}_{custom_lng:.5f}',
+                'name': custom_name,
+                'lat': custom_lat,
+                'lon': custom_lng,
+                'category': 'custom',
+            }
+            if not any(p['id'] == new_poi['id'] for p in st.session_state.selected_pois):
+                st.session_state.selected_pois.append(new_poi)
+                st.session_state.smooth_path = []
+                st.session_state.road_polyline = []
+                st.rerun()
+    st.caption("💡 也可以直接點地圖空白處新增自訂點")
+
+    st.divider()
+
+    # ── 瞬間傳送 ──────────────────────────────────────────────────────────
+    st.markdown("### 🌀 瞬間傳送")
+    with st.expander("直接跳到某個座標", expanded=False):
+        tp1, tp2 = st.columns(2)
+        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat")
+        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng")
+        if st.button("🌀 立刻傳送到此座標", use_container_width=True):
+            import urllib.request as _ur2, json as _json2
+            try:
+                payload = _json2.dumps({
+                    "coords": [{"lat": tp_lat, "lon": tp_lng}],
+                    "loop": False
+                }).encode()
+                req = _ur2.Request("http://127.0.0.1:7788/push",
+                                   data=payload,
+                                   headers={"Content-Type": "application/json"})
+                _ur2.urlopen(req, timeout=5)
+                st.success(f"已傳送到 ({tp_lat:.4f}, {tp_lng:.4f})")
+            except Exception as e:
+                st.error(str(e))
+
+    st.divider()
+
     # ── 路徑計算 ──────────────────────────────────────────────────────────
     st.markdown("### 🧭 路徑計算")
     if n_sel >= 2:
@@ -592,19 +692,89 @@ with col_map:
 
     m = _render_map(center_lat, center_lon)
     st_map = st_folium(m, height=690, width="100%",
-                       returned_objects=["last_object_clicked"])
+                       returned_objects=["last_clicked", "last_object_clicked"])
 
-    # 點擊地圖標記 → 加入選取清單
-    if st_map and st_map.get("last_object_clicked"):
-        clat = st_map["last_object_clicked"]["lat"]
-        clng = st_map["last_object_clicked"]["lng"]
-        for poi in disp_pois:
-            if (abs(_lat(poi) - clat) < 0.0001 and
-                    abs(_lng(poi) - clng) < 0.0001):
-                if not any(_poi_compat(p)['id'] == _poi_compat(poi)['id']
-                           for p in st.session_state.selected_pois):
-                    st.session_state.selected_pois.append(poi)
+    # 點擊地圖任意位置處理
+    clicked = st_map.get("last_clicked") or st_map.get("last_object_clicked") if st_map else None
+    if clicked:
+        clat = clicked["lat"]
+        clng = clicked["lng"]
+        click_id = f"{clat:.6f}_{clng:.6f}"
+
+        if click_id != st.session_state.last_click_id:
+            st.session_state.last_click_id = click_id
+
+            if st.session_state.instant_mode:
+                import urllib.request as _ur3, json as _json3
+                if st.session_state.get('instant_teleport', False):
+                    # ── 瞬間傳送模式 ────────────────────────────────────
+                    try:
+                        payload = _json3.dumps({
+                            "coords": [{"lat": clat, "lon": clng}],
+                            "loop": False
+                        }).encode()
+                        req = _ur3.Request("http://127.0.0.1:7788/push",
+                                           data=payload,
+                                           headers={"Content-Type": "application/json"})
+                        _ur3.urlopen(req, timeout=5)
+                        st.toast(f"已傳送到 ({clat:.4f}, {clng:.4f})")
+                    except Exception as e:
+                        st.error(str(e))
+                    st.rerun()
+                else:
+                    # ── 即時點即走模式 ──────────────────────────────────────
+                    target_poi = {
+                        'id': f'instant_{click_id}',
+                        'name': f'目標({clat:.4f},{clng:.4f})',
+                        'lat': clat,
+                        'lon': clng,
+                        'category': 'custom',
+                    }
+                    cur_loc = bridge.last_location if bridge.last_location else None
+                    if cur_loc:
+                        origin_poi = {
+                            'id': 'current_pos',
+                            'name': '目前位置',
+                            'lat': cur_loc[0],
+                            'lon': cur_loc[1],
+                            'category': 'custom',
+                        }
+                        two_pois = [origin_poi, target_poi]
+                    else:
+                        two_pois = [target_poi]
+
+                with st.spinner("規劃路徑中..."):
+                    try:
+                        smooth, road_nodes, planner = _full_pipeline(
+                            two_pois, clat, clng)
+                        st.session_state.smooth_path   = smooth
+                        st.session_state.road_polyline = road_nodes
+                        st.session_state.planner       = planner
+                        import urllib.request as _ur, json as _json
+                        payload = _json.dumps({
+                            "coords": smooth,
+                            "loop": False
+                        }).encode()
+                        req = _ur.Request("http://127.0.0.1:7788/push",
+                                          data=payload,
+                                          headers={"Content-Type": "application/json"})
+                        _ur.urlopen(req, timeout=5)
+                        st.toast(f"導航至 ({clat:.4f}, {clng:.4f})")
+                    except Exception as e:
+                        st.error(str(e))
+                st.rerun()
+
+            else:
+                # ── 一般模式：點任意位置加入清單 ───────────────────────
+                new_poi = {
+                    'id': f'custom_{click_id}',
+                    'name': f'自訂({clat:.4f},{clng:.4f})',
+                    'lat': clat,
+                    'lon': clng,
+                    'category': 'custom',
+                }
+                if not any(p['id'] == new_poi['id'] for p in st.session_state.selected_pois):
+                    st.session_state.selected_pois.append(new_poi)
                     st.session_state.smooth_path   = []
                     st.session_state.road_polyline = []
                     st.rerun()
-                break
