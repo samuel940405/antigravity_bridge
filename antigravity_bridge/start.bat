@@ -9,12 +9,12 @@ powershell -Command "Start-Process powershell -ArgumentList '-NoExit', '-Command
 timeout /t 3 /nobreak > nul
 
 echo [2/3] Starting bridge_server...
-start "BridgeServer" cmd /k "cd /d C:\皮克敏\antigravity_bridge && venv\Scripts\activate && py bridge_server.py"
+start "BridgeServer" cmd /k "cd /d C:\皮克敏\antigravity_bridge && venv\Scripts\activate.bat && py bridge_server.py"
 
 timeout /t 3 /nobreak > nul
 
 echo [3/3] Starting Streamlit...
-start "Streamlit" cmd /k "cd /d C:\皮克敏\antigravity_bridge && venv\Scripts\activate && python -m streamlit run app.py"
+start "Streamlit" cmd /k "cd /d C:\皮克敏\antigravity_bridge && venv\Scripts\activate.bat && python -m streamlit run app.py"
 
 echo.
 echo Done! Open http://localhost:8501
