@@ -1,0 +1,4 @@
+pip freeze > requirements.txt
+git add -A
+git commit -m "V5.0 成功：DVT持久連線+BridgeServer架構，更新requirements.txt"
+git push

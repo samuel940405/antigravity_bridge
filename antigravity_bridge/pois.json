@@ -1,107 +1,212 @@
 [
     {
-        "id": "dc250539ff32a91a2491806bb1fee3af",
-        "name": "Ensorhuis",
-        "lat": 51.233328774227985,
-        "lon": 2.9160947116588054,
-        "category": "historic"
-    },
-    {
-        "id": "1f7ceab67cac20118f3210cc97896b76",
-        "name": "Galerie BeauSite",
-        "lat": 51.2344384,
-        "lon": 2.9159971,
-        "category": "tourism"
-    },
-    {
-        "id": "cfe544e931b0da2b62c25ef1c3a2c332",
-        "name": "artwork",
-        "lat": 51.23173,
-        "lon": 2.9138406,
-        "category": "tourism"
-    },
-    {
-        "id": "167eac8ba418689e74bbad9ca5dad9f7",
-        "name": "Casino Kursaal",
-        "lat": 51.23182944881365,
-        "lon": 2.9119842147587063,
-        "category": "historic"
-    },
-    {
-        "id": "fcbcb134ec083f06035dc6aede1c5cda",
-        "name": "Dansende Golven",
-        "lat": 51.232268999999995,
-        "lon": 2.910959449999999,
-        "category": "tourism"
-    },
-    {
-        "id": "83699361d0fc3bf622b8798bfd7dc8bd",
-        "name": "artwork",
-        "lat": 51.2325871,
-        "lon": 2.9160658,
-        "category": "tourism"
-    },
-    {
-        "id": "936165747d5ae49c31ae3682d9f042a9",
-        "name": "Kursaal",
-        "lat": 51.2317717,
-        "lon": 2.9120579,
+        "id": "09b0d203d62a5080d6e4e0523e9e878d",
+        "name": "張靜愚紀念圖書館",
+        "lat": 24.958278547007932,
+        "lon": 121.24071277671929,
         "category": "amenity"
     },
     {
-        "id": "7eaeeb1a5efc072a453ca3eaba74df54",
-        "name": "artwork",
-        "lat": 51.2316006,
-        "lon": 2.9141771,
+        "id": "2345f120b4f789e8ef69fc16b2489df4",
+        "name": "中原大學全人教育村花園廣場",
+        "lat": 24.958743111515123,
+        "lon": 121.24189620103104,
+        "category": "leisure"
+    },
+    {
+        "id": "6e72f30e70f69da28a0b7e0147f26170",
+        "name": "中原大學藝術中心",
+        "lat": 24.9589959,
+        "lon": 121.2418821,
+        "category": "amenity"
+    },
+    {
+        "id": "bf84a9fe7ff8dfd66e9dbd16b6c7f178",
+        "name": "舊校門",
+        "lat": 24.9576439,
+        "lon": 121.2402098,
+        "category": "historic"
+    },
+    {
+        "id": "8b07e1833fcb95cf44cd7e93665ca217",
+        "name": "garden",
+        "lat": 24.95965873579208,
+        "lon": 121.24183329932062,
+        "category": "leisure"
+    },
+    {
+        "id": "40e12a235f3d412d21ff0f8005632d5a",
+        "name": "樂Yueh畫室x寵物",
+        "lat": 24.958867,
+        "lon": 121.2431152,
         "category": "tourism"
     },
     {
-        "id": "eb0605a3ad8e57cd9255ecdf2402172e",
-        "name": "artwork",
-        "lat": 51.231581,
-        "lon": 2.9141673,
+        "id": "bceffec232a9cda0f4d66120d304a0a7",
+        "name": "普忠公園",
+        "lat": 24.960092973382938,
+        "lon": 121.24377659024927,
+        "category": "leisure"
+    },
+    {
+        "id": "ed97d89143532a0df76d308542e933dc",
+        "name": "中原埤塘生態公園",
+        "lat": 24.95659656528567,
+        "lon": 121.24557789895034,
+        "category": "leisure"
+    },
+    {
+        "id": "eaf6e89be5f9913510159a0c8ed115bf",
+        "name": "中原天廈社區開放空間",
+        "lat": 24.95575448418346,
+        "lon": 121.23746048566365,
+        "category": "leisure"
+    },
+    {
+        "id": "493c9466dfaab9e07976218bdab2df01",
+        "name": "信實宿舍開放空間",
+        "lat": 24.959555351172202,
+        "lon": 121.245765590019,
+        "category": "leisure"
+    },
+    {
+        "id": "65c497323a25fd43d894609478905a16",
+        "name": "arts_centre",
+        "lat": 24.96277856596075,
+        "lon": 121.24135523330975,
+        "category": "amenity"
+    },
+    {
+        "id": "5d869fc1cf36e17df38752c7b7b3d310",
+        "name": "桃園市中壢區公所普仁里辦公處",
+        "lat": 24.9543085,
+        "lon": 121.2384199,
+        "category": "amenity"
+    },
+    {
+        "id": "98a33b470ae4c890191383393c67b77f",
+        "name": "普仁綠地",
+        "lat": 24.955413101650237,
+        "lon": 121.23710705676872,
+        "category": "leisure"
+    },
+    {
+        "id": "67c3018ec0b907739cb993d4764d7063",
+        "name": "arts_centre",
+        "lat": 24.96298814421764,
+        "lon": 121.24130243506998,
+        "category": "amenity"
+    },
+    {
+        "id": "8046b54bf96b44b0a8a1d61441c7db8a",
+        "name": "中壢區普仁市民活動中心",
+        "lat": 24.954000150000002,
+        "lon": 121.23863915,
+        "category": "amenity"
+    },
+    {
+        "id": "e736a057c895ecf828a1231a9583136c",
+        "name": "arts_centre",
+        "lat": 24.9630938836201,
+        "lon": 121.2418031918192,
+        "category": "amenity"
+    },
+    {
+        "id": "4c087c25ca53c216c5596216a438181e",
+        "name": "arts_centre",
+        "lat": 24.96327354613447,
+        "lon": 121.24122425474327,
+        "category": "amenity"
+    },
+    {
+        "id": "b6e3e506bc45676da764e34699b0987b",
+        "name": "arts_centre",
+        "lat": 24.96337928360843,
+        "lon": 121.24173054175246,
+        "category": "amenity"
+    },
+    {
+        "id": "80a17345068c7072e2f47c1631d10841",
+        "name": "arts_centre",
+        "lat": 24.9634860836201,
+        "lon": 121.2411768918192,
+        "category": "amenity"
+    },
+    {
+        "id": "26ee755156e54d1c84165018b1994b01",
+        "name": "arts_centre",
+        "lat": 24.96358386596075,
+        "lon": 121.24168103330975,
+        "category": "amenity"
+    },
+    {
+        "id": "2a2a05d9199b8f2a4b048ce89982e6e6",
+        "name": "中原文創園區",
+        "lat": 24.96366064493504,
+        "lon": 121.2414761942849,
         "category": "tourism"
     },
     {
-        "id": "0dcab8e455d0691ae448b0be62493574",
-        "name": "artwork",
-        "lat": 51.2315724,
-        "lon": 2.9141628,
-        "category": "tourism"
+        "id": "f0f050aa612617b564942e4007ff0b5e",
+        "name": "arts_centre",
+        "lat": 24.963690644203197,
+        "lon": 121.24112188501198,
+        "category": "amenity"
     },
     {
-        "id": "80bb71f354e1209be9712a22ac315879",
-        "name": "artwork",
-        "lat": 51.2339232,
-        "lon": 2.9168272,
-        "category": "tourism"
+        "id": "1a6547ba08dbea61e4130d8444dbd146",
+        "name": "慈濟公園",
+        "lat": 24.95339483203948,
+        "lon": 121.24425150330383,
+        "category": "leisure"
     },
     {
-        "id": "38fba4d8fadb2dbd4eb4745b8e7eed63",
-        "name": "artwork",
-        "lat": 51.231495,
-        "lon": 2.9131609,
-        "category": "tourism"
+        "id": "99a9e6abdeafc244a42e33d8a883b219",
+        "name": "arts_centre",
+        "lat": 24.963795444217638,
+        "lon": 121.24162713506998,
+        "category": "amenity"
     },
     {
-        "id": "c6fa2f70ce2a0a14f39b9535650cb4d9",
-        "name": "artwork",
-        "lat": 51.231531,
-        "lon": 2.9141474,
-        "category": "tourism"
+        "id": "a96de22c4e39d90db9ee6791ee8965a0",
+        "name": "arts_centre",
+        "lat": 24.96389618553845,
+        "lon": 121.24107231148172,
+        "category": "amenity"
     },
     {
-        "id": "a1955cbfaa28fe34ef7a7ef1697770cd",
-        "name": "artwork",
-        "lat": 51.2315127,
-        "lon": 2.9141423,
-        "category": "tourism"
+        "id": "f5e38be3006c38a8bc2eafcf2e80955f",
+        "name": "arts_centre",
+        "lat": 24.96400098360843,
+        "lon": 121.24157424175246,
+        "category": "amenity"
     },
     {
-        "id": "9ac608c50f6e1f1c2d6a9c3ac6ce41b0",
-        "name": "artwork",
-        "lat": 51.2313454,
-        "lon": 2.9125403,
-        "category": "tourism"
+        "id": "bc74a938b4a4968010235480a80d5db9",
+        "name": "arts_centre",
+        "lat": 24.964109764046,
+        "lon": 121.24101841364627,
+        "category": "amenity"
+    },
+    {
+        "id": "cdaee3e6568d728bc0afa869ad4c91e3",
+        "name": "arts_centre",
+        "lat": 24.964211546134468,
+        "lon": 121.24151705474328,
+        "category": "amenity"
+    },
+    {
+        "id": "c9e335954316958e0b87cbdf169ab5a5",
+        "name": "桃園市立圖書館中華閱覽室",
+        "lat": 24.961882,
+        "lon": 121.236054,
+        "category": "amenity"
+    },
+    {
+        "id": "da5e4d140462a113a20ae5a1230acefb",
+        "name": "arts_centre",
+        "lat": 24.964311344203196,
+        "lon": 121.240969985012,
+        "category": "amenity"
     }
 ]

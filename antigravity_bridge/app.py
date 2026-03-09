@@ -178,12 +178,13 @@ def _poi_compat(poi) -> dict:
 # ═══════════════════════════════════════════════════════════════════════════════
 @st.cache_resource
 def _init_resources():
-    bridge = LocationBridge()
-    loop   = asyncio.new_event_loop()
+    loop = asyncio.new_event_loop()
     threading.Thread(
         target=lambda lp: (asyncio.set_event_loop(lp), lp.run_forever()),
         args=(loop,), daemon=True,
     ).start()
+    bridge = LocationBridge()
+    bridge.loop = loop
     asyncio.run_coroutine_threadsafe(bridge.start_services(), loop)
     
     # In V8.1.1 Ultimate Edition, connection is established on-the-fly during injection.
@@ -376,7 +377,7 @@ with st.sidebar:
     # 時速 Slider
     st.markdown("**🚶 模擬移動時速**")
     target_speed = st.slider(
-        "km/h", min_value=1.0, max_value=15.0, value=10.0, step=0.5,
+        "km/h", min_value=1, max_value=20, value=10, step=1,
         label_visibility="collapsed",
     )
     bridge.target_speed_kmh = target_speed
@@ -556,10 +557,30 @@ with col_ctrl:
     has_path = bool(st.session_state.smooth_path)
     # 注入 iOS（需已連線）
     nav_disabled = not st.session_state.connected or not has_path
+    if st.button("⏹ 停止導航", use_container_width=True):
+        import urllib.request as _ur2
+        try:
+            _ur2.urlopen(_ur2.Request("http://127.0.0.1:7788/stop", data=b'{}', headers={"Content-Type": "application/json"}), timeout=3)
+            st.success("已停止導航")
+        except Exception as e:
+            st.error(str(e))
+
     if st.button("📡 注入至 iOS 裝置", disabled=nav_disabled, use_container_width=True):
-        asyncio.run_coroutine_threadsafe(
-            bridge.push_path_to_queue(st.session_state.smooth_path, loop=loop_nav), bg_loop)
-        st.success(f"✅ 已推送 {len(st.session_state.smooth_path):,} pts (無限循環: {loop_nav})")
+        import urllib.request as _ur, json as _json
+        payload = _json.dumps({
+            "coords": st.session_state.smooth_path,
+            "loop":   loop_nav
+        }).encode()
+        try:
+            req = _ur.Request("http://127.0.0.1:7788/push",
+                              data=payload,
+                              headers={"Content-Type": "application/json"})
+            res = _json.loads(_ur.urlopen(req, timeout=5).read())
+            st.success(f"✅ 已推送 {res.get('pts', 0):,} pts (無限循環: {loop_nav})")
+        except Exception as e:
+            st.error(str(e))
+
+
 
 
 # ── 地圖 ─────────────────────────────────────────────────────────────────────
