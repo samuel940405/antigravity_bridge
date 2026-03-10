@@ -601,8 +601,8 @@ with col_ctrl:
     st.markdown("### 🌀 瞬間傳送")
     with st.expander("直接跳到某個座標", expanded=False):
         tp1, tp2 = st.columns(2)
-        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat")
-        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng")
+        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat_1")
+        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng_1")
         if st.button("🌀 立刻傳送到此座標", use_container_width=True):
             import urllib.request as _ur2, json as _json2
             try:
@@ -619,8 +619,8 @@ with col_ctrl:
     st.markdown("### 🌀 瞬間傳送")
     with st.expander("直接跳到某個座標", expanded=False):
         tp1, tp2 = st.columns(2)
-        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat")
-        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng")
+        tp_lat = tp1.number_input("緯度", value=24.9580, format="%.6f", key="tp_lat_1")
+        tp_lng = tp2.number_input("經度", value=121.2410, format="%.6f", key="tp_lng_1")
         if st.button("🌀 立刻傳送到此座標", use_container_width=True):
             import urllib.request as _ur2, json as _json2
             try:
