@@ -5,3 +5,6 @@ __pycache__/
 .vscode/
 pois.db
 *.gpx
+antigravity_bridge/cache/
+antigravity_bridge/pois.json
+antigravity_bridge/pois.db
