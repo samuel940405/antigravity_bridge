@@ -1,72 +1,212 @@
 [
     {
-        "id": "ede96dbd691dc32eff645c5a1c3b2ebe",
-        "name": "wayside_shrine",
-        "lat": 45.4284772,
-        "lon": 12.3313256,
-        "category": "historic"
+        "id": "1616701f5365ca9f71f0e28734b7215d",
+        "name": "Fener Parkı",
+        "lat": 36.84634753085996,
+        "lon": 30.75866284528851,
+        "category": "leisure"
     },
     {
-        "id": "976641cb4f1852c7c0ebeb7da0bd3d9a",
+        "id": "dfac9d2fe165c2dc7de51d5a640f9c33",
+        "name": "Falez Parkı 3",
+        "lat": 36.84922030831725,
+        "lon": 30.752466920525563,
+        "category": "leisure"
+    },
+    {
+        "id": "17972b11bf0ac9ebcc023304523f4790",
         "name": "park",
-        "lat": 45.42951226732633,
-        "lon": 12.332303295779111,
+        "lat": 36.85148541144957,
+        "lon": 30.752770300416053,
         "category": "leisure"
     },
     {
-        "id": "eaf19a96338b652c47cf371ecee52a6e",
-        "name": "Magazzini del Sale",
-        "lat": 45.42897950731478,
-        "lon": 12.333329379562215,
-        "category": "tourism"
-    },
-    {
-        "id": "1a01af0bf0042bffcf0c8718ed042509",
-        "name": "yes",
-        "lat": 45.4299845,
-        "lon": 12.331168949999999,
+        "id": "e261ed5efa27e15bf4b3136c7d9e2e37",
+        "name": "Atatürk",
+        "lat": 36.8522629,
+        "lon": 30.7593448,
         "category": "historic"
     },
     {
-        "id": "7b0dffc8e622f230f8e0761346c75b8e",
-        "name": "Joseph Brodsky",
-        "lat": 45.4288382,
-        "lon": 12.3291516,
-        "category": "historic"
-    },
-    {
-        "id": "1d2274bf09ce55cbd33892a7476a89d5",
-        "name": "artwork",
-        "lat": 45.4304529,
-        "lon": 12.331685,
-        "category": "tourism"
-    },
-    {
-        "id": "7d4a17c03b497b78eff49ca089523903",
-        "name": "garden",
-        "lat": 45.43044302805352,
-        "lon": 12.332264962020586,
+        "id": "fc17c5656490079bba4023860cbaef74",
+        "name": "park",
+        "lat": 36.85336563164049,
+        "lon": 30.756934751812476,
         "category": "leisure"
     },
     {
-        "id": "817bf0a6393e173fe45a71a751dd4c2d",
-        "name": "artwork",
-        "lat": 45.4305352,
-        "lon": 12.331428,
-        "category": "tourism"
+        "id": "c18db9ac35deebe5367658712ed8bfd7",
+        "name": "Trafik Parki",
+        "lat": 36.85163079765246,
+        "lon": 30.750726010554853,
+        "category": "leisure"
     },
     {
-        "id": "86e9b36531376dd45551a112d0ce35be",
-        "name": "artwork",
-        "lat": 45.4305216,
-        "lon": 12.3310645,
-        "category": "tourism"
+        "id": "54788a6c56868080b158afed5df1b581",
+        "name": "park",
+        "lat": 36.84833334029361,
+        "lon": 30.764666442067973,
+        "category": "leisure"
     },
     {
-        "id": "8a357dacd55a94863c5656b375fb7e2f",
-        "name": "Pozzo Artistico",
-        "lat": 45.4305613,
-        "lon": 12.3317029,
-        "category": "tourism"
+        "id": "b5501fd1b8a0e365f9fd2247a7f86cc7",
+        "name": "Cumhuriyet Parkı",
+        "lat": 36.85228432247358,
+        "lon": 30.761678492261353,
+        "category": "leisure"
+    },
+    {
+        "id": "e1f61987e8f9c88e5c2daf7a62c1f2b4",
+        "name": "park",
+        "lat": 36.85217270905364,
+        "lon": 30.750718965473677,
+        "category": "leisure"
+    },
+    {
+        "id": "507dd790a29616b7efe91c52ed7e646d",
+        "name": "park",
+        "lat": 36.84966277903137,
+        "lon": 30.765047499128112,
+        "category": "leisure"
+    },
+    {
+        "id": "fa71522cb79956966fd2d62a51121204",
+        "name": "park",
+        "lat": 36.853956747959806,
+        "lon": 30.760221623557296,
+        "category": "leisure"
+    },
+    {
+        "id": "7589b4feb6c61c502de15ca114435e25",
+        "name": "park",
+        "lat": 36.84965450988336,
+        "lon": 30.765551655546215,
+        "category": "leisure"
+    },
+    {
+        "id": "0fa8c9153d3aed677227d8019ac68434",
+        "name": "park",
+        "lat": 36.85477516084298,
+        "lon": 30.756252881895517,
+        "category": "leisure"
+    },
+    {
+        "id": "3de3920573630875717f903c8d79b56d",
+        "name": "park",
+        "lat": 36.85424616692632,
+        "lon": 30.752830944339095,
+        "category": "leisure"
+    },
+    {
+        "id": "e4ce839d8dbae75977f4b474a56937a6",
+        "name": "park",
+        "lat": 36.853375442141505,
+        "lon": 30.762328356616383,
+        "category": "leisure"
+    },
+    {
+        "id": "59599b7a4a4c99dc6bc54b016cc699fe",
+        "name": "park",
+        "lat": 36.85506540674997,
+        "lon": 30.753989814833353,
+        "category": "leisure"
+    },
+    {
+        "id": "21c8618b37e586a3009bbc0a3caa5cd6",
+        "name": "park",
+        "lat": 36.85397167881053,
+        "lon": 30.762427211260043,
+        "category": "leisure"
+    },
+    {
+        "id": "d971e8249fc3cb19224c8ed2346a4b9d",
+        "name": "Nazlı Sitesi Parkı",
+        "lat": 36.853166696457215,
+        "lon": 30.748803941094508,
+        "category": "leisure"
+    },
+    {
+        "id": "f359729676133fd800f20652b8e68ef4",
+        "name": "Belediye Parkı",
+        "lat": 36.85351586287843,
+        "lon": 30.76387099520796,
+        "category": "leisure"
+    },
+    {
+        "id": "8578ed7af0c411217faeb056ca2e2c2a",
+        "name": "park",
+        "lat": 36.8546491492282,
+        "lon": 30.76251116786143,
+        "category": "leisure"
+    },
+    {
+        "id": "be38eb9f74543a47c3ba50cfe897a3b4",
+        "name": "Falez Caddesi Parkı",
+        "lat": 36.85650464674076,
+        "lon": 30.755407782456444,
+        "category": "leisure"
+    },
+    {
+        "id": "bd56b8620e7f5c8c27205bd1f7258072",
+        "name": "park",
+        "lat": 36.85530733212566,
+        "lon": 30.762781221848087,
+        "category": "leisure"
+    },
+    {
+        "id": "3731645213dc5326b8290b37f0fc950b",
+        "name": "park",
+        "lat": 36.853766951303996,
+        "lon": 30.74762995505488,
+        "category": "leisure"
+    },
+    {
+        "id": "71e36e69a7720813413939a6e9ee45c9",
+        "name": "park",
+        "lat": 36.8565826420743,
+        "lon": 30.7537000422908,
+        "category": "leisure"
+    },
+    {
+        "id": "662c08098cf65d78c55b4e8f6e3101d4",
+        "name": "park",
+        "lat": 36.8529513924733,
+        "lon": 30.766767131213253,
+        "category": "leisure"
+    },
+    {
+        "id": "69e01410b5d03b4c54a4f5ecbebd22b2",
+        "name": "park",
+        "lat": 36.856516273144805,
+        "lon": 30.76117011239585,
+        "category": "leisure"
+    },
+    {
+        "id": "688809da6d7b538b51651e2abbe5ce94",
+        "name": "park",
+        "lat": 36.85596830452275,
+        "lon": 30.762882938540212,
+        "category": "leisure"
+    },
+    {
+        "id": "6b5a602c40dd81921c8849ac6f3c99de",
+        "name": "park",
+        "lat": 36.85346984870508,
+        "lon": 30.76711143013617,
+        "category": "leisure"
+    },
+    {
+        "id": "835edd676b7b94ef959535411e8009ef",
+        "name": "park",
+        "lat": 36.855837877191604,
+        "lon": 30.748298769383172,
+        "category": "leisure"
+    },
+    {
+        "id": "9ac55a658154b92ef1fd1bdff5786ace",
+        "name": "Pir Sultan Abdal Parkı",
+        "lat": 36.85812924906449,
+        "lon": 30.75610767894615,
+        "category": "leisure"
     }
 ]
