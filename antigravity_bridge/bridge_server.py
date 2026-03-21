@@ -34,9 +34,13 @@ async def handle_push(request):
 async def handle_stop(request):
     bridge.is_navigating = False
     bridge.loop_navigation = False
+    bridge.loop_path = False
+    # 清空 queue
     while not bridge.queue.empty():
         try: bridge.queue.get_nowait()
         except: break
+    # 重置 session，讓下次注入重新建立連線
+    bridge._reconnecting = False
     return web.json_response({'ok': True})
 
 async def handle_status(request):
