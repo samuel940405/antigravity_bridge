@@ -455,6 +455,7 @@ with col_ctrl:
                 st.session_state.selected_pois.append(new_poi)
                 st.session_state.smooth_path   = []
                 st.session_state.road_polyline = []
+                st.session_state.map_center    = [clat, clng]
                 st.rerun()
     st.caption("💡 也可以直接點地圖空白處新增自訂點")
 
@@ -525,7 +526,7 @@ with col_map:
 
     m = _render_map(center_lat, center_lon)
     st_map = st_folium(m, height=690, width="100%",
-                       returned_objects=["last_clicked", "last_object_clicked"],
+                       returned_objects=["last_clicked", "last_object_clicked", "center", "zoom"],
                        key="main_map")
 
     # 保存地圖當前視角
@@ -579,4 +580,5 @@ with col_map:
                     st.session_state.selected_pois.append(new_poi)
                     st.session_state.smooth_path   = []
                     st.session_state.road_polyline = []
+                    st.session_state.map_center    = [clat, clng]
                     st.rerun()
